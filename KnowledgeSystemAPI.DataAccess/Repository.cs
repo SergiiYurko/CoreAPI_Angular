@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,9 +23,9 @@ namespace KnowledgeSystemAPI.DataAccess
             _dbSet.Add(item);
         }
 
-        public TEntity FindById(int id)
+        public async Task<TEntity> FindByIdAsync(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
         public IEnumerable<TEntity> Get()
