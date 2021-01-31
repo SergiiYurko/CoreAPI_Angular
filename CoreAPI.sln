@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.DataAccess", "KnowledgeSystemAPI.DataAccess\KnowledgeSystemAPI.DataAccess.csproj", "{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.Handlers", "KnowledgeSystemAPI.Handlers\KnowledgeSystemAPI.Handlers.csproj", "{45DBEF50-239C-48F0-B88E-CA4E944688D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45DBEF50-239C-48F0-B88E-CA4E944688D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45DBEF50-239C-48F0-B88E-CA4E944688D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45DBEF50-239C-48F0-B88E-CA4E944688D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45DBEF50-239C-48F0-B88E-CA4E944688D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

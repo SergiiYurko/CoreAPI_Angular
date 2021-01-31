@@ -1,4 +1,10 @@
+using System;
+using System.Linq;
+using System.Reflection;
 using KnowledgeSystemAPI.DataAccess;
+using KnowledgeSystemAPI.DataAccess.Interfaces;
+using KnowledgeSystemAPI.Handlers.Handlers.Home;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +33,9 @@ namespace KnowledgeSystemAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoreAPIWithAngular", Version = "v1" });
             });
 
-            services.AddDbContext<DataContext>(option => option.UseSqlServer());
+            services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connection")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddMediatR(GetMediatrAssembliesToScan());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +58,18 @@ namespace KnowledgeSystemAPI
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private Type[] GetMediatrAssembliesToScan()
+        {
+            var nameSpace = "KnowledgeSystemAPI.Handlers";
+            var assemblies = Assembly.Load(nameSpace)
+                .GetTypes()
+                .Where(p => p.Namespace != null)
+                .Where(p => p.Namespace.Contains(nameSpace, StringComparison.InvariantCultureIgnoreCase))
+                .ToArray();
+
+            return assemblies;
         }
     }
 }
