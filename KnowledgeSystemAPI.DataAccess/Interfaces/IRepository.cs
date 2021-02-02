@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace KnowledgeSystemAPI.DataAccess.Interfaces
@@ -8,8 +9,8 @@ namespace KnowledgeSystemAPI.DataAccess.Interfaces
     {
         void Create(TEntity item);
         Task<TEntity> FindByIdAsync(int id);
-        IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
         void Remove(TEntity item);
         void Update(TEntity item);
     }

@@ -17,7 +17,7 @@ namespace KnowledgeSystemAPI.DataAccess
         {
             var userList = new List<User>
             {
-                new User {UserId = 1, FirstName = "Serhii", LastName = "Yurko"}
+                new User {UserId = 1, FirstName = "Serhii", LastName = "Yurko", Email = "test", Password = "test"}
             };
 
             modelBuilder.Entity<User>().HasData(userList);
