@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -28,14 +29,14 @@ namespace KnowledgeSystemAPI.DataAccess
             return await _dbSet.FindAsync(id);
         }
 
-        public IEnumerable<TEntity> Get()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return _dbSet.AsNoTracking().ToList();
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
-        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+        public async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbSet.AsNoTracking().AsEnumerable().Where(predicate).ToList();
+            return await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
 
         public void Remove(TEntity item)
