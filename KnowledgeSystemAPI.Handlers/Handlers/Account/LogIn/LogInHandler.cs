@@ -18,9 +18,9 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn
         public async Task<LogInModelResponse> Handle(LogInModelRequest request, CancellationToken cancellationToken)
         {
             var userInfo = (await _unitOfWork.Users.GetAsync(user => request.Email == user.Email && request.Password == user.Password)).FirstOrDefault();
-            if (userInfo != null)
-                return new LogInModelResponse {FirstName = userInfo.FirstName, LastName = userInfo.LastName};
-            return null;
+            return userInfo != null
+                ? new LogInModelResponse {FirstName = userInfo.FirstName, LastName = userInfo.LastName}
+                : null;
         }
     }
 }

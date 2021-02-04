@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn;
-using KnowledgeSystemAPI.Handlers.Handlers.Home;
+using KnowledgeSystemAPI.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,24 +17,19 @@ namespace KnowledgeSystemAPI.Controllers
             _mediator = mediator;
         }
 
-        [Route("getUser")]
-        [HttpGet]
-        public async Task<ActionResult<UserResponseModel>> GetUser([FromQuery] UserRequestModel user)
-        {
-            var result = await _mediator.Send(user);
-
-            if (result == null)
-                return NotFound(user);
-
-            return result;
-        }
-
         [Route("logIn")]
         [HttpPost]
         public async Task<ActionResult<LogInModelResponse>> LogIn([FromBody] LogInModelRequest user)
         {
-            var result = await _mediator.Send(user);
-            return result;
+            if (user == null)
+                return BadRequest("Incorrect data input.");
+
+            var userModel = await _mediator.Send(user);
+
+            if (userModel == null)
+                return Unauthorized(user);
+
+            return Ok(new {Token = AuthOptions.GenerateToken(), Model = userModel});
         }
     }
 }
