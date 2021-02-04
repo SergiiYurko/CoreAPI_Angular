@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserModelRequest } from './userModelRequest';
+import { NgForm }   from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogInComponent implements OnInit {
 
-  constructor() { }
+  public user: UserModelRequest = new UserModelRequest();
+  invalidLogin: boolean = false;
 
-  ngOnInit(): void {
+  constructor(private router: Router, private http: HttpClient) { 
   }
 
+  ngOnInit(){}
+
+  login(form: NgForm){
+      this.http.post("https://localhost:44374/api/Account/logIn", this.user).subscribe(response => {
+      const token = (<any>response).token;
+      localStorage.setItem("jwt", token);
+      this.invalidLogin = false;
+      this.router.navigate(["home"]);
+    }, err => {
+   this.invalidLogin = true;
+  })
+  }
 }

@@ -39,6 +39,14 @@ namespace KnowledgeSystemAPI
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMediatR(GetMediatrAssembliesToScan());
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -69,6 +77,8 @@ namespace KnowledgeSystemAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("EnableCORS");
 
             app.UseAuthentication();
             app.UseAuthorization();
