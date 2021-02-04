@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 using KnowledgeSystemAPI.Handlers.Handlers.Home;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowledgeSystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HomeController: ControllerBase
     {
         private readonly IMediator _mediator;
