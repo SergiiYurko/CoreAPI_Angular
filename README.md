@@ -6,7 +6,7 @@ The &quot;manager&quot; user selects programmers according to the specified crit
 reports. User and role management. Knowledge area management.
 
 <h3>Confugrating Angular</h3>
-npm uinstall -g @angular-cli<br/>
+npm uninstall -g @angular-cli<br/>
 npm install -g @angular/cli@latest<br/>
 
 npm install bootstrap<br/>
