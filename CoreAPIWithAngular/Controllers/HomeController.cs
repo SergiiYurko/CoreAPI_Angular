@@ -8,7 +8,7 @@ namespace KnowledgeSystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class HomeController: ControllerBase
     {
         private readonly IMediator _mediator;
