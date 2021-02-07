@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
 using MediatR;
 
@@ -9,18 +10,19 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn
     public class LogInHandler: IRequestHandler<LogInModelRequest, LogInModelResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public LogInHandler(IUnitOfWork unitOfWork)
+        public LogInHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<LogInModelResponse> Handle(LogInModelRequest request, CancellationToken cancellationToken)
         {
             var userInfo = (await _unitOfWork.Users.GetAsync(user => request.Email == user.Email && request.Password == user.Password)).FirstOrDefault();
-            return userInfo != null
-                ? new LogInModelResponse {FirstName = userInfo.FirstName, LastName = userInfo.LastName}
-                : null;
+
+            return _mapper.Map<LogInModelResponse>(userInfo);
         }
     }
 }

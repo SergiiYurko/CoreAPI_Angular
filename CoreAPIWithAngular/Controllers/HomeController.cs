@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using KnowledgeSystemAPI.Handlers.Handlers.Home;
+using KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,7 @@ namespace KnowledgeSystemAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class HomeController: ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,9 +18,9 @@ namespace KnowledgeSystemAPI.Controllers
             _mediator = mediator;
         }
 
-        [Route("getUser")]
+        [Route("getUserTechnologies")]
         [HttpGet]
-        public async Task<ActionResult<UserResponseModel>> GetUser([FromQuery]UserRequestModel user)
+        public async Task<ActionResult<UserTechnologiesModelResponse>> GetUserTechnologies([FromQuery]UserTechnologiesModelRequest user)
         {
             var result = await _mediator.Send(user);
            

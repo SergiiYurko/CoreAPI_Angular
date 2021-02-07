@@ -28,7 +28,8 @@ export function GetToken(){
     RouterModule.forRoot([
       {path: "", component: LogInComponent},
       {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
-      {path: "login", component: LogInComponent}
+      {path: "login", component: LogInComponent},
+      {path: "signup", component: SignUpComponent}
     ]),
     JwtModule.forRoot({
       config: {
@@ -39,7 +40,7 @@ export function GetToken(){
     }),
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

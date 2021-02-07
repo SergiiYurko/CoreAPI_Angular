@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserModelRequest } from './userModelRequest';
+import { UserModelRequest } from './log-in-ModelRequest';
 import { NgForm }   from '@angular/forms';
 import { Router } from '@angular/router';
 

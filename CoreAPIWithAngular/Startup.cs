@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using AutoMapper;
 using KnowledgeSystemAPI.DataAccess;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
+using KnowledgeSystemAPI.Handlers.Helpers;
 using KnowledgeSystemAPI.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,6 +64,8 @@ namespace KnowledgeSystemAPI
                         ValidateIssuerSigningKey = true,
                     };
                 });
+
+            services.AddAutoMapper(cfg => cfg.AddProfile(typeof(MappingProfile)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
