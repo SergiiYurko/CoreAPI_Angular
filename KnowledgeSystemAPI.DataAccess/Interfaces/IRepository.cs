@@ -13,5 +13,8 @@ namespace KnowledgeSystemAPI.DataAccess.Interfaces
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate);
         void Remove(TEntity item);
         void Update(TEntity item);
+        IEnumerable<TEntity> GetWithInclude(params Expression<Func<TEntity, object>>[] includeProperties);
+        Task<IEnumerable<TEntity>> GetWithIncludeAsync(Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties);
     }
 }

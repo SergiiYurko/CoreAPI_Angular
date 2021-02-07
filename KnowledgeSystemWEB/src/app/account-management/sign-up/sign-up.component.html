@@ -1,1 +1,35 @@
-<p>sign-up works!</p>
+<div id = "middle_centered">
+    <p class="lead text-center">
+        Sign up please
+    </p>
+    <div class = "container col-3 border bg-light rounded">
+        <form #form="ngForm" (ngSubmit)="signup(form)">
+                 <div class="form-group">
+                    <label for="">Email address</label>
+                    <input class ="form-control" name = "email" [(ngModel)]="user.email" type="email" placeholder="Enter email" required> 
+                 </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input class ="form-control" name = "password" [(ngModel)]="user.password" type="password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Repeat password</label>
+                    <input class ="form-control" name = "repeat_password" [(ngModel)]="user.repeatPassword" type="password" placeholder="Repeat password" required>
+                </div>
+                <div class="form-group">
+                    <label for="">First name</label>
+                    <input class ="form-control" name = "first_name" [(ngModel)]="user.firstName" type="text" placeholder="Enter first name" required> 
+                 </div>
+                 <div class="form-group">
+                    <label for="">Last name</label>
+                    <input class ="form-control" name = "last_name" [(ngModel)]="user.lastName" type="text" placeholder="Enter last name" required> 
+                 </div>
+                <div class="form-group">
+                    <button class="btn btn-info btn-block" type="submit" [disabled] = "form.invalid">SUBMIT</button>
+                </div>
+                <div class="form-group"> 
+                    <a class="text-muted" href="/login">Log in</a>
+                </div>
+        </form>
+    </div>
+</div>

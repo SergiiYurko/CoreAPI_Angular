@@ -8,6 +8,7 @@ namespace KnowledgeSystemAPI.DataAccess
     {
         private readonly DataContext _dbContext;
         private IRepository<User> _userRepository;
+        private IRepository<UserTechnology> _userTechnologiesRepository;
 
         public UnitOfWork(DataContext dbContext)
         {
@@ -15,6 +16,7 @@ namespace KnowledgeSystemAPI.DataAccess
         }
 
         public IRepository<User> Users => _userRepository ??= new Repository<User>(_dbContext);
+        public IRepository<UserTechnology> UserTechnologies => _userTechnologiesRepository??= new Repository<UserTechnology>(_dbContext);
 
         public void SaveChanges()
         {
