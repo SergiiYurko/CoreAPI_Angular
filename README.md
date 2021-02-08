@@ -22,3 +22,4 @@ angular.json:<br/>
             ]<br/>
 
 npm install @auth0/angular-jwt --save
+npm i bootstrap-icons
