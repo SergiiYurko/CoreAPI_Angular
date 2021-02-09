@@ -1,4 +1,4 @@
-export class UserModelRequest {
+export class LogInUserModelRequest {
     public email: string = '';
     public password: string = ''
 }

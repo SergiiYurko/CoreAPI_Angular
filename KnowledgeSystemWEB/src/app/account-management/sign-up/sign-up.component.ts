@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from './sign-up-ModelRequest';
+import { SignUpUserModelRequest } from './sign-up-ModelRequest';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +11,7 @@ import { User } from './sign-up-ModelRequest';
 })
 export class SignUpComponent implements OnInit {
 
-  public user: User = new User();
+  public user: SignUpUserModelRequest = new SignUpUserModelRequest();
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {

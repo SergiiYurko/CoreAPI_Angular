@@ -1,4 +1,4 @@
-export class User {
+export class SignUpUserModelRequest {
     public email: string = "";
     public password: string = "";
     public repeatPassword: string = "";
