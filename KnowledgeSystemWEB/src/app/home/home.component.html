@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class = "container row">
+    <p class = "font-weight-light">Hello {{user.name}}</p>
+    <a href="" (click) = "logout()" class="bi bi-box-arrow-left"></a>
+</div>
+
+<div>
+    <li *ngFor="let technology of technologies">
+      <p>{{technology.groupTitle}}</p>
+      <p>{{technology.title}}</p>
+      <p>{{technology.level}}</p>   
+    </li>
+</div>

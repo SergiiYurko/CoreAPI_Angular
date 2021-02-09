@@ -22,7 +22,7 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
 
         public async Task<UserTechnologiesModelResponse> Handle(UserTechnologiesModelRequest request, CancellationToken cancellationToken)
         {
-            var user = (await _unitOfWork.Users.GetWithIncludeAsync(u => u.UserId == request.Id)).FirstOrDefault();
+            var user = (await _unitOfWork.Users.GetWithIncludeAsync(u => u.UserId == request.UserId)).FirstOrDefault();
             if (user != null)
             {
                 var technologies = (await
