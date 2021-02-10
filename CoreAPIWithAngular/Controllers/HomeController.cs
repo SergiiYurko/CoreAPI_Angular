@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -20,7 +21,7 @@ namespace KnowledgeSystemAPI.Controllers
 
         [Route("getUserTechnologies")]
         [HttpGet]
-        public async Task<ActionResult<UserTechnologiesModelResponse>> GetUserTechnologies([FromQuery]UserTechnologiesModelRequest user)
+        public async Task<ActionResult<List<UserTechnologiesModelResponse>>> GetUserTechnologies([FromQuery]UserTechnologiesModelRequest user)
         {
             var result = await _mediator.Send(user);
            

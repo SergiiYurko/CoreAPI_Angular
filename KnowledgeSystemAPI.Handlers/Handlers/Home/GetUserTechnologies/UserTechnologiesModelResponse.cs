@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using KnowledgeSystemAPI.Handlers.DTO;
-
-namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
+﻿namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
 {
     public class UserTechnologiesModelResponse
     {
-        public List<TechnologyDTO> TechnologyList{ get; set; }
+        public string GroupTitle { get; set; }
+        public string Title { get; set; }
+        public string Level { get; set; }
     }
 }

@@ -8,7 +8,29 @@ import { User } from './Models/User'
   selector: 'app-home',
   templateUrl: './home.component.html',
   styles: [
-  ]
+    `.grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 1rem 1rem;
+      }
+      .left {
+        width: 20%;
+      }
+      .right {
+        width: 20%;
+      }
+      .center {
+        flex-grow: 1;
+        text-align: center;
+      }
+      .cont {
+        display: flex;
+      }
+      .container_technology {
+        display: inline-flex;        
+      }
+
+    `]
 })
 export class HomeComponent implements OnInit {
 
@@ -19,12 +41,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     const params = new HttpParams().set("userId", this.user.id.toString());
-    this.http.get("https://localhost:44374/api/Home/getUserTechnologies", {params}).subscribe(response => this.technologies = (<any>response).technologyList);
+    this.http.get("https://localhost:44374/api/Home/getUserTechnologies", {params}).subscribe(response => this.technologies = <Technology[]>response);
   }
 
   logout(){
     localStorage.removeItem("jwt");
     localStorage.removeItem("user");
     this.route.navigate(["login"]);
+
   }
 }
