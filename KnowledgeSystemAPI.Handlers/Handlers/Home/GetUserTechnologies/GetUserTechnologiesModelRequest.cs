@@ -3,7 +3,7 @@ using MediatR;
 
 namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
 {
-    public class UserTechnologiesModelRequest: IRequest<List<UserTechnologiesModelResponse>>
+    public class GetUserTechnologiesModelRequest: IRequest<List<GetUserTechnologiesModelResponse>>
     {
         public int UserId { get; set; }
     }

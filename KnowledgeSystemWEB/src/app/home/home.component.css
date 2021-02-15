@@ -1,0 +1,24 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem 1rem;
+  }
+  .right {
+    width: 20%;
+  }
+  .center {
+    flex-grow: 1;
+    text-align: center;
+  }
+  .cont {
+    display: flex;
+    margin-top: 1rem;
+  }
+  .container_technology {
+    display: inline-flex;
+    margin: 0.5rem;      
+  }
+
+  .bi-dot::before {
+    font-size: larger;
+}

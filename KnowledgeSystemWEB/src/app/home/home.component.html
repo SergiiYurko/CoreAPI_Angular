@@ -1,14 +1,7 @@
 <div class = "cont">
-    <div class = "left">
-        <h4 class = "font-weight-light">Hello {{user.name}}</h4>
-    </div>
     <div class = "center">
-        <i class="bi bi-dot text-danger"></i>
-        <span class = "font-weight-light">Novice</span>
-        <i class="bi bi-dot text-warning"></i>
-        <span class = "font-weight-light">Intermediate</span>
-        <i class="bi bi-dot text-success"></i>
-        <span class = "font-weight-light">Advanced</span>
+        <button type="button" class="btn btn-info mr-2">Edit skills</button>
+        <button type="button" class="btn btn-info" (click) = "onProfileClick()">Edit profile</button>
     </div>    
     <div class = "right">
         <span class = "text-dark">Log out</span>
@@ -16,14 +9,24 @@
     </div>
 </div>
 
+<div class = "container-fluid mt-3">
+    <div class = "center">
+        <i class="bi bi-dot text-danger"></i>
+        <span class = "font-weight-light">Novice</span>
+        <i class="bi bi-dot text-warning"></i>
+        <span class = "font-weight-light">Intermediate</span>
+        <i class="bi bi-dot text-success"></i>
+        <span class = "font-weight-light">Advanced</span>
+    </div>
+</div>
 
-<div class = "container">
+<div class = "container-fluid mt-1">
     <div class = grid>
-        <div *ngFor="let technology in techonologies" class = "border border-light">
-                <p class ="text-info text-center">{{technology.groupTitle}}</p>
+        <div *ngFor="let item of groupTechnologies" class = "border border-light">
+                <p class ="text-info text-center">{{item.title}}</p>
                 <hr>
-                <div class = "bg-light container_technology">
-                    <p>{{technology.title}}</p>
+                <div *ngFor = "let technology of item.technologies" class = "bg-light container_technology">
+                    <p class = "mb-0">{{technology.title}}</p>
                     <i *ngIf="technology.level=='Novice'" class="bi bi-dot text-danger"></i>
                     <i *ngIf="technology.level=='Intermediate'" class="bi bi-dot text-warning"></i>
                     <i *ngIf="technology.level=='Advanced'" class="bi bi-dot text-success"></i>
