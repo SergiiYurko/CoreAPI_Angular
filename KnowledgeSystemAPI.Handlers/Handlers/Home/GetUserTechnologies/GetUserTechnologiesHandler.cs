@@ -8,7 +8,7 @@ using MediatR;
 
 namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
 {
-    public class GetUserTechnologiesHandler: IRequestHandler<UserTechnologiesModelRequest, List<UserTechnologiesModelResponse>>
+    public class GetUserTechnologiesHandler: IRequestHandler<GetUserTechnologiesModelRequest, List<GetUserTechnologiesModelResponse>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
             _mapper = mapper;
         }
 
-        public async Task<List<UserTechnologiesModelResponse>> Handle(UserTechnologiesModelRequest request, CancellationToken cancellationToken)
+        public async Task<List<GetUserTechnologiesModelResponse>> Handle(GetUserTechnologiesModelRequest request, CancellationToken cancellationToken)
         {
             var user = (await _unitOfWork.Users.GetWithIncludeAsync(u => u.UserId == request.UserId)).FirstOrDefault();
             if (user != null)
@@ -28,7 +28,7 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Home.GetUserTechnologies
                     _unitOfWork.UserTechnologies.GetWithIncludeAsync(p => p.UserId == user.UserId, i => i.Technology,
                         i => i.Technology.Group)).ToList();
 
-                return _mapper.Map<List<UserTechnologiesModelResponse>>(technologies);
+                return _mapper.Map<List<GetUserTechnologiesModelResponse>>(technologies);
             }
 
             return null;

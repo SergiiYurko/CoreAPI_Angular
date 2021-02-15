@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI", "CoreAPIWithAngular\KnowledgeSystemAPI.csproj", "{365EAE59-2E52-4DF9-A704-F010B194ED13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeSystemAPI", "CoreAPIWithAngular\KnowledgeSystemAPI.csproj", "{365EAE59-2E52-4DF9-A704-F010B194ED13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.Domain", "KnowledgeSystemAPI.Domain\KnowledgeSystemAPI.Domain.csproj", "{1F84FB13-4A45-417F-A202-7A7A46C7D3F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeSystemAPI.Domain", "KnowledgeSystemAPI.Domain\KnowledgeSystemAPI.Domain.csproj", "{1F84FB13-4A45-417F-A202-7A7A46C7D3F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.DataAccess", "KnowledgeSystemAPI.DataAccess\KnowledgeSystemAPI.DataAccess.csproj", "{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeSystemAPI.DataAccess", "KnowledgeSystemAPI.DataAccess\KnowledgeSystemAPI.DataAccess.csproj", "{E6604D15-E0DF-4AD0-AD35-73693CCFE9C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnowledgeSystemAPI.Handlers", "KnowledgeSystemAPI.Handlers\KnowledgeSystemAPI.Handlers.csproj", "{45DBEF50-239C-48F0-B88E-CA4E944688D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KnowledgeSystemAPI.Handlers", "KnowledgeSystemAPI.Handlers\KnowledgeSystemAPI.Handlers.csproj", "{45DBEF50-239C-48F0-B88E-CA4E944688D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

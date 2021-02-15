@@ -21,7 +21,7 @@ namespace KnowledgeSystemAPI.Controllers
 
         [Route("getUserTechnologies")]
         [HttpGet]
-        public async Task<ActionResult<List<UserTechnologiesModelResponse>>> GetUserTechnologies([FromQuery]UserTechnologiesModelRequest user)
+        public async Task<ActionResult<List<GetUserTechnologiesModelResponse>>> GetUserTechnologies([FromQuery]GetUserTechnologiesModelRequest user)
         {
             var result = await _mediator.Send(user);
            

@@ -34,7 +34,7 @@ namespace KnowledgeSystemAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoreAPIWithAngular", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Knowledge System", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -97,7 +97,7 @@ namespace KnowledgeSystemAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoreAPIWithAngular v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Knowledge system v1"));
             }
 
             app.UseHttpsRedirection();
