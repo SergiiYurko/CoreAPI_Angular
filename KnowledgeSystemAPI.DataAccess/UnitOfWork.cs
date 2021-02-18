@@ -4,11 +4,12 @@ using KnowledgeSystemAPI.Domain.Models;
 
 namespace KnowledgeSystemAPI.DataAccess
 {
-    public class UnitOfWork: IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private readonly DataContext _dbContext;
         private IRepository<User> _userRepository;
         private IRepository<UserTechnology> _userTechnologiesRepository;
+        private IRepository<Role> _roleRepository;
 
         public UnitOfWork(DataContext dbContext)
         {
@@ -16,11 +17,12 @@ namespace KnowledgeSystemAPI.DataAccess
         }
 
         public IRepository<User> Users => _userRepository ??= new Repository<User>(_dbContext);
-        public IRepository<UserTechnology> UserTechnologies => _userTechnologiesRepository??= new Repository<UserTechnology>(_dbContext);
+        public IRepository<UserTechnology> UserTechnologies => _userTechnologiesRepository ??= new Repository<UserTechnology>(_dbContext);
+        public IRepository<Role> Roles => _roleRepository ??= new Repository<Role>(_dbContext);
 
-        public void SaveChanges()
+        public void SaveChangesAsync()
         {
-            _dbContext.SaveChanges();
+            _dbContext.SaveChangesAsync();
         }
 
         private bool _disposed;
@@ -37,8 +39,8 @@ namespace KnowledgeSystemAPI.DataAccess
 
         public void Dispose()
         {
-           Dispose(true);
-           GC.SuppressFinalize(this);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

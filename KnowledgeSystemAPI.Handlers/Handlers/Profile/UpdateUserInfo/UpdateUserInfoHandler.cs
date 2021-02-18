@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
 using MediatR;
 
@@ -9,10 +10,12 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Profile.UpdateUserInfo
     public class UpdateUserInfoHandler: IRequestHandler<UpdateUserInfoModelRequest, UpdateUserInfoModelResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public UpdateUserInfoHandler(IUnitOfWork unitOfWork)
+        public UpdateUserInfoHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<UpdateUserInfoModelResponse> Handle(UpdateUserInfoModelRequest request, CancellationToken cancellationToken)
@@ -30,10 +33,12 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Profile.UpdateUserInfo
                     user.Password = request.Password;
 
                 _unitOfWork.Users.Update(user);
-                _unitOfWork.SaveChanges();
+                _unitOfWork.SaveChangesAsync();
+
+                return _mapper.Map<UpdateUserInfoModelResponse>(user);
             }
 
-            return new UpdateUserInfoModelResponse();
+            return null;
         }
     }
 }

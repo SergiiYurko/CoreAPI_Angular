@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn;
 using KnowledgeSystemAPI.Handlers.Handlers.Account.SignUp;
-using KnowledgeSystemAPI.Helpers;
+using KnowledgeSystemAPI.Handlers.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,30 +22,24 @@ namespace KnowledgeSystemAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<LogInModelResponse>> LogIn([FromBody] LogInModelRequest user)
         {
-
-            if (user == null)
-                return BadRequest("Incorrect data input.");
-
             var userModel = await _mediator.Send(user);
 
             if (userModel == null)
-                return Unauthorized(user);
+                return BadRequest("A user with such credentials doesn't exist.");
 
-            return Ok(new {Token = AuthOptions.GenerateToken(), Model = userModel});
+            return Ok(new {Token = AuthOptions.GenerateToken(userModel.Name, userModel.RoleType), Model = userModel});
         }
 
         [Route("signUp")]
         [HttpPost]
         public async Task<ActionResult<SignUpModelResponse>> SignUp([FromBody] SignUpModelRequest user)
         {
-            if (user == null)
-                return BadRequest("Incorrect data input.");
-
             var userModel = await _mediator.Send(user);
-            if (userModel == null)
-                return BadRequest("User is already exist");
 
-            return Ok(userModel);
+            if (userModel == null)
+                return BadRequest("User is already exist.");
+
+            return Ok("Successfully registered.");
         }
     }
 }

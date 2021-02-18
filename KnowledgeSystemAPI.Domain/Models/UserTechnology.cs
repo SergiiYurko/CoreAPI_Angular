@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
-
-namespace KnowledgeSystemAPI.Domain.Models
+﻿namespace KnowledgeSystemAPI.Domain.Models
 {
     public class UserTechnology
     {
