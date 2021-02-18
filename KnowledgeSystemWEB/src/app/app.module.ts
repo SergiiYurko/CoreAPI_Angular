@@ -10,9 +10,10 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { HomeComponent } from './home/home.component'
 import { AuthGuard } from './guadrs/auth-guard-service';
 import { ProfileComponent } from './profile/profile.component';
+import { NotifierModule } from "angular-notifier";
 
-export function GetToken(){
-  return localStorage.getItem("jwt")
+export function GetToken() {
+  return localStorage.getItem("jwt");
 }
 
 @NgModule({
@@ -21,17 +22,18 @@ export function GetToken(){
     LogInComponent,
     SignUpComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: "", component: LogInComponent},
+      {path: "", component: HomeComponent, canActivate: [AuthGuard]},
       {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
       {path: "login", component: LogInComponent},
       {path: "signup", component: SignUpComponent},
-      {path: "profile", component: ProfileComponent, canActivate: [AuthGuard]}
+      {path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
+      {path: "**", component: HomeComponent, canActivate: [AuthGuard]}
     ]),
     JwtModule.forRoot({
       config: {
@@ -41,10 +43,23 @@ export function GetToken(){
       }
     }),
     HttpClientModule,
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right'
+        },
+        vertical: {
+          position: 'top',
+          distance: 60
+        },
+      },
+      behaviour: {
+        stacking: 3
+      },
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  
  }

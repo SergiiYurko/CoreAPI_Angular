@@ -6,6 +6,7 @@ namespace KnowledgeSystemAPI.DataAccess.Interfaces
     {
         IRepository<User> Users { get; }
         IRepository<UserTechnology> UserTechnologies { get; }
-        void SaveChanges();
+        IRepository<Role> Roles{ get; }
+        void SaveChangesAsync();
     }
 }

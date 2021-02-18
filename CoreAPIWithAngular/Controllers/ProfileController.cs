@@ -19,7 +19,7 @@ namespace KnowledgeSystemAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("userInfo")]
+        [HttpGet]
         public async Task<ActionResult<GetUserInfoModelResponse>> GetUserInfo([FromQuery] GetUserInfoModelRequest model)
         {
             return await _mediator.Send(model);
@@ -29,7 +29,12 @@ namespace KnowledgeSystemAPI.Controllers
         public async Task<ActionResult<UpdateUserInfoModelResponse>> UpdateUserInfo(
             [FromBody] UpdateUserInfoModelRequest model)
         {
-            return await _mediator.Send(model);
+            var response = await _mediator.Send(model);
+
+            if (response == null)
+                return BadRequest("The user does not exist.");
+
+            return response;
         }
     }
 }

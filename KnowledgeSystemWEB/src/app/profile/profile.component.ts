@@ -3,6 +3,7 @@ import { UserInfo } from './Models/UserInfo';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-profile',
@@ -13,12 +14,12 @@ export class ProfileComponent implements OnInit {
 
   public user: UserInfo = new UserInfo();
 
-  constructor(private http: HttpClient, private route:Router) {
+  constructor(private http: HttpClient, private route:Router, private notifier: NotifierService) {
    }
 
   ngOnInit(): void {
     const params = new HttpParams().set("Id", (JSON.parse(localStorage.getItem('user') || '{}')).id.toString());
-    this.http.get("https://localhost:44374/api/Profile/userInfo", {params}).subscribe(response => this.user = <UserInfo>response)
+    this.http.get("https://localhost:44374/api/Profile", {params}).subscribe(response => this.user = <UserInfo>response)
   }
 
   onCancelClick(){
@@ -26,6 +27,10 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfile(form: NgForm){
-    
+    this.http.post("https://localhost:44374/api/Profile", this.user).subscribe(response => {
+      this.route.navigate(["home"]);
+    }, err => {
+      this.notifier.notify("error", err.error);
+    })
   }
 }

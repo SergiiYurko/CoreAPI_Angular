@@ -20,7 +20,7 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn
 
         public async Task<LogInModelResponse> Handle(LogInModelRequest request, CancellationToken cancellationToken)
         {
-            var userInfo = (await _unitOfWork.Users.GetAsync(user => request.Email == user.Email && request.Password == user.Password)).FirstOrDefault();
+            var userInfo = (await _unitOfWork.Users.GetWithIncludeAsync(p => p.Email == request.Email && p.Password == request.Password, i => i.Role.RoleType)).FirstOrDefault();
 
             return _mapper.Map<LogInModelResponse>(userInfo);
         }

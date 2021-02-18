@@ -2,10 +2,11 @@ using System;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using FluentValidation;
 using KnowledgeSystemAPI.DataAccess;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
 using KnowledgeSystemAPI.Handlers.Helpers;
-using KnowledgeSystemAPI.Helpers;
+using KnowledgeSystemAPI.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,7 @@ namespace KnowledgeSystemAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Knowledge System", Version = "v1" });
@@ -78,9 +80,9 @@ namespace KnowledgeSystemAPI
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = AuthOptions.ISSUER,
+                        ValidIssuer = AuthOptions.Issuer,
                         ValidateAudience = true,
-                        ValidAudience = AuthOptions.AUDIENCE,
+                        ValidAudience = AuthOptions.Audience,
                         ValidateLifetime = true,
                         IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                         ValidateIssuerSigningKey = true,
@@ -88,6 +90,8 @@ namespace KnowledgeSystemAPI
                 });
 
             services.AddAutoMapper(cfg => cfg.AddProfile(typeof(MappingProfile)));
+            services.AddValidatorsFromAssembly(Assembly.Load("KnowledgeSystemApi.Handlers"));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +103,8 @@ namespace KnowledgeSystemAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Knowledge system v1"));
             }
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
 

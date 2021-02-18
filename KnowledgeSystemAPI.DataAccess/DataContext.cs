@@ -15,9 +15,23 @@ namespace KnowledgeSystemAPI.DataAccess
         public DbSet<Group> Groups { get; set; }
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<UserTechnology> UserTechnologies { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleType> RoleTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var roleTypeList = new List<RoleType>
+            {
+                new RoleType {RoleTypeId = 1, Type = "user"},
+                new RoleType {RoleTypeId = 2, Type = "admin"}
+            };
+
+            var roleList = new List<Role>
+            {
+                new Role {RoleId = 1, RoleTypeId = 1},
+                new Role {RoleId = 2, RoleTypeId = 2}
+            };
+
             var groupList = new List<Group>
             {
                 new Group {GroupId = 1, TitleGroup = ".NET"}
@@ -35,8 +49,9 @@ namespace KnowledgeSystemAPI.DataAccess
             {
                 new User
                 {
-                    UserId = 1, FirstName = "Serhii", LastName = "Yurko", Email = "test", Password = "test"
+                    UserId = 1, FirstName = "Serhii", LastName = "Yurko", Email = "admin@com", Password = "admin", RoleId = 1
                 }
+
             };
 
             var userTechnologyList = new List<UserTechnology>
@@ -69,6 +84,8 @@ namespace KnowledgeSystemAPI.DataAccess
             modelBuilder.Entity<Group>().HasData(groupList);
             modelBuilder.Entity<Technology>().HasData(technologyList);
             modelBuilder.Entity<UserTechnology>().HasData(userTechnologyList);
+            modelBuilder.Entity<RoleType>().HasData(roleTypeList);
+            modelBuilder.Entity<Role>().HasData(roleList);
 
             base.OnModelCreating(modelBuilder);
         }
