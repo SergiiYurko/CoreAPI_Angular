@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using KnowledgeSystemAPI.Handlers.Handlers.Profile.GetUserInfo;
+﻿using KnowledgeSystemAPI.Handlers.Handlers.Profile.GetUserInfo;
 using KnowledgeSystemAPI.Handlers.Handlers.Profile.UpdateUserInfo;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KnowledgeSystemAPI.Controllers
 {
@@ -34,7 +34,7 @@ namespace KnowledgeSystemAPI.Controllers
             if (response == null)
                 return BadRequest("The user does not exist.");
 
-            return response;
+            return new ObjectResult(response);
         }
     }
 }

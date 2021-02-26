@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from './Models/UserInfo';
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { NotifierService } from "angular-notifier";
+import { ProfileService } from '../services/profile-service';
 
 @Component({
   selector: 'app-profile',
@@ -14,23 +13,20 @@ export class ProfileComponent implements OnInit {
 
   public user: UserInfo = new UserInfo();
 
-  constructor(private http: HttpClient, private route:Router, private notifier: NotifierService) {
-   }
+  constructor(private router: Router, private service: ProfileService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    const params = new HttpParams().set("Id", (JSON.parse(localStorage.getItem('user') || '{}')).id.toString());
-    this.http.get("https://localhost:44374/api/Profile", {params}).subscribe(response => this.user = <UserInfo>response)
+    this.route.data.subscribe(data => {
+      this.user = data.profile
+    });
   }
 
-  onCancelClick(){
-    this.route.navigate(["home"]);   
+  onCancelClick() {
+    this.router.navigate(["home"]);
   }
 
-  editProfile(form: NgForm){
-    this.http.post("https://localhost:44374/api/Profile", this.user).subscribe(response => {
-      this.route.navigate(["home"]);
-    }, err => {
-      this.notifier.notify("error", err.error);
-    })
+  editProfile(form: NgForm) {
+    this.service.editProfile(this.user);
   }
 }

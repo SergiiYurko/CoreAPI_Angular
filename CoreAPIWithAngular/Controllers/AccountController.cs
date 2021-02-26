@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn;
+﻿using KnowledgeSystemAPI.Handlers.Handlers.Account.LogIn;
 using KnowledgeSystemAPI.Handlers.Handlers.Account.SignUp;
 using KnowledgeSystemAPI.Handlers.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace KnowledgeSystemAPI.Controllers
 {
