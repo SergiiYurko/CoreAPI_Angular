@@ -1,0 +1,9 @@
+<div class = "container-fluid">
+    <nav class = "navbar navbar-light bg-info row justify-content-between">
+      <a class = "navbar-brand text-light" href="/home">Knowledge system accounting</a>
+      <div *ngIf = "isUserAuthorized()">
+        <span class = "text-light mr-2">Log out</span>
+        <a href="" (click) = "logout()" class="bi bi-box-arrow-left text-light"></a>
+      </div>
+    </nav>
+</div>

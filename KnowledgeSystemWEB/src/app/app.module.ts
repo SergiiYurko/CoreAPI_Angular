@@ -8,9 +8,14 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from "@auth0/angular-jwt";
 import { HomeComponent } from './home/home.component'
-import { AuthGuard } from './guadrs/auth-guard-service';
+import { AuthGuard } from './services/auth-guard-service';
 import { ProfileComponent } from './profile/profile.component';
 import { NotifierModule } from "angular-notifier";
+import { HeaderComponent } from './component/header/header-component';
+import { FooterComponent } from './component/footer/footer-component';
+import { SkillsComponent } from './skills/skills.component';
+import { UserProfileResolve } from './resolvers/user-profile-resolve';
+import { UserTechnologiesResolve } from './resolvers/user-technologies-resolve';
 
 export function GetToken() {
   return localStorage.getItem("jwt");
@@ -23,17 +28,21 @@ export function GetToken() {
     SignUpComponent,
     HomeComponent,
     ProfileComponent,
+    HeaderComponent,
+    FooterComponent,
+    SkillsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
-      {path: "", component: HomeComponent, canActivate: [AuthGuard]},
-      {path: "home", component: HomeComponent, canActivate: [AuthGuard]},
-      {path: "login", component: LogInComponent},
-      {path: "signup", component: SignUpComponent},
-      {path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
-      {path: "**", component: HomeComponent, canActivate: [AuthGuard]}
+      { path: "", component: HomeComponent, resolve: {technologies: UserTechnologiesResolve}, canActivate: [AuthGuard] },
+      { path: "home", component: HomeComponent, resolve: {technologies: UserTechnologiesResolve}, canActivate: [AuthGuard] },
+      { path: "login", component: LogInComponent },
+      { path: "signup", component: SignUpComponent },
+      { path: "profile", component: ProfileComponent, resolve: {profile: UserProfileResolve}, canActivate: [AuthGuard] },
+      { path: "skills", component: SkillsComponent, canActivate: [AuthGuard] },
+      { path: "**", component: HomeComponent, resolve: {technologies: UserTechnologiesResolve}, canActivate: [AuthGuard] }
     ]),
     JwtModule.forRoot({
       config: {
@@ -62,4 +71,4 @@ export function GetToken() {
   bootstrap: [AppComponent]
 })
 export class AppModule {
- }
+}

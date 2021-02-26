@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Reflection;
-using AutoMapper;
 using FluentValidation;
 using KnowledgeSystemAPI.DataAccess;
 using KnowledgeSystemAPI.DataAccess.Interfaces;
@@ -17,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 
 namespace KnowledgeSystemAPI
 {
@@ -56,14 +54,14 @@ namespace KnowledgeSystemAPI
                                 Id = "Bearer"
                             }
                         },
-                        new string[] { }
+                        System.Array.Empty<string>()
                     }
                 });
             });
 
             services.AddDbContext<DataContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Connection")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddMediatR(GetMediatrAssembliesToScan());
+            services.AddMediatR(Assembly.Load("KnowledgeSystemApi.Handlers"));
 
             services.AddCors(options =>
             {
@@ -119,18 +117,6 @@ namespace KnowledgeSystemAPI
             {
                 endpoints.MapControllers();
             });
-        }
-
-        private Type[] GetMediatrAssembliesToScan()
-        {
-            var nameSpace = "KnowledgeSystemAPI.Handlers";
-            var assemblies = Assembly.Load(nameSpace)
-                .GetTypes()
-                .Where(p => p.Namespace != null)
-                .Where(p => p.Namespace.Contains(nameSpace, StringComparison.InvariantCultureIgnoreCase))
-                .ToArray();
-
-            return assemblies;
         }
     }
 }

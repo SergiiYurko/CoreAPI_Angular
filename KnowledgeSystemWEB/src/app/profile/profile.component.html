@@ -1,7 +1,13 @@
+<notifier-container></notifier-container>
 <div class="container col-3 border rounded bg-light mt-5">
   <p class="lead text-center">Edit profile info</p>
   <form #form="ngForm" (ngSubmit)="editProfile(form)">
     <div class="form-group">
+      <input type = "hidden"
+        class="form-control"
+        name="email"
+        [(ngModel)]="user.id"
+      />
       <label for="" class="lead">Email address</label>
       <input
         class="form-control"

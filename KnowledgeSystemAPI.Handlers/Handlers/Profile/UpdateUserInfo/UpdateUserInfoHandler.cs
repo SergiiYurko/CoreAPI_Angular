@@ -23,18 +23,19 @@ namespace KnowledgeSystemAPI.Handlers.Handlers.Profile.UpdateUserInfo
             var user = (await _unitOfWork.Users.GetAsync(p => p.UserId == request.Id)).FirstOrDefault();
             if (user != null)
             {
-                if (!string.IsNullOrEmpty(request.Email))
-                    user.Email = request.Email;
-                if (!string.IsNullOrEmpty(request.FirstName))
+                if (request.FirstName != null)
                     user.FirstName = request.FirstName;
-                if (!string.IsNullOrEmpty(request.LastName))
+
+                if (request.LastName != null)
                     user.LastName = request.LastName;
-                if (!string.IsNullOrEmpty(request.Password))
+
+                if (request.Password != null)
                     user.Password = request.Password;
 
-                _unitOfWork.Users.Update(user);
-                _unitOfWork.SaveChangesAsync();
+                if (request.Email != null)
+                    user.Email = request.Email;
 
+                //_unitOfWork.SaveChangesAsync();
                 return _mapper.Map<UpdateUserInfoModelResponse>(user);
             }
 
